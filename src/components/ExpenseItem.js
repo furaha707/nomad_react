@@ -1,20 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './ExpenseItem.css';
 import { AiFillAlert, AiFillBulb } from "react-icons/ai";
 
-export default class ExpenseItem extends Component {
-  render() {
+const ExpenseItem = ({expense, handleDelete}) => {
+
+  
+
     return (
       <li className="item">
         <div className="info">
-          <span className="expense">식비</span>
-          <span className="amount">1000원</span>
+          <span className="expense">{expense.charge}</span>
+          <span className="amount">{expense.amount}</span>
         </div>
         <div>
           <button className="edit-btn"><AiFillBulb /></button>
-          <button className="clear-btn"><AiFillAlert /></button>
+          <button className="clear-btn" onClick={() => {handleDelete(expense.id)}}><AiFillAlert /></button>
         </div>
       </li>
     )
+
   }
-}
+
+export default ExpenseItem 

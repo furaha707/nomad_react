@@ -1,43 +1,23 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import './index.css'; 
-import  ExpenseForm  from "./components/ExpenseForm";
+import ExpenseForm  from "./components/ExpenseForm";
 import ExpenseList from "./components/ExpenseList";
 
+const App = () => {
 
-// function Food({name, image, rating}) {
-//   return (
-//     <div className="foods">
-//       <span>{name}</span>  
-//       <h4>{rating}</h4>
-//       <img src={image} alt={name}></img>  
-//     </div>
-//   );
-// }
+  const [expenses, setExpenses] = useState([
+  {id: 1, charge: '교통비', amount: 1600},
+  {id: 2, charge: '식비', amount: 400},
+  {id: 3, charge: '렌트비', amount: 1200}
+]);
 
-// const foodList = [{id:1, name:'kimchi', image:'#', rating: 1}, {id:2, name:'soup', image:'#', rating: 2}]
+  // setState 를 써보자
+  const handleDelete = (id) => {
+    const newArray = expenses.filter(expense => expense.id !== id)
 
-// // 타입체크
-// Food.propTypes = {
-//   name: PropTypes.string.isRequired,
-//   image: PropTypes.string.isRequired,
-//   rating: PropTypes.number.isRequired
-// }
+    setExpenses(newArray)
+  }
 
-// function renderFood(dish){
-//   console.log(dish)
-//   return <Food name={dish.name} image={dish.image} key={dish.id} rating={dish.rating}/>
-// }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       {foodList.map(renderFood)}
-//     </div>
-//   );
-// }
-
-export default class App extends Component {
-  render(){
     return(
       <main className='main-container'>
         <h1>예산 계산기</h1>
@@ -45,12 +25,17 @@ export default class App extends Component {
           <ExpenseForm />
         </div>
         <div style={{ width: '100%', backgroundColor:'white', padding: '1rem' }}>
-          <ExpenseList />
+          <ExpenseList expenses={expenses} handleDelete={handleDelete} />
         </div>
         <div style={{ display:'flex', justifyContent:'end', marginTop: '1rem' }}>
           총지출: <span>원</span>
         </div>
       </main>
     )
-  }
 }
+
+
+export default App;
+
+
+// 노마드강의 - propTypes 개념
